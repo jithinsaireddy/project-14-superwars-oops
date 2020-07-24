@@ -2,23 +2,23 @@ const PLAYERS = [
     "Spiderman",
     "Captain America",
     "Wonderwoman",
-    // "Popcorn",
-    // "Gemwoman",
-    // "Bolt",
-    // "Antwoman",
-    // "Mask",
-    // "Tiger",
-    // "Captain",
-    // "Catwoman",
-    // "Fish",
-    // "Hulk",
-    // "Ninja",
-    // "Black Cat",
-    // "Volverine",
-    // "Thor",
-    // "Slayer",
-    // "Vader",
-    // "Slingo"
+    "Popcorn",
+    "Gemwoman",
+    "Bolt",
+    "Antwoman",
+    "Mask",
+    "Tiger",
+    "Captain",
+    "Catwoman",
+    "Fish",
+    "Hulk",
+    "Ninja",
+    "Black Cat",
+    "Volverine",
+    "Thor",
+    "Slayer",
+    "Vader",
+    "Slingo"
 ];
 
 // Player Class
@@ -26,6 +26,11 @@ class Player {
     constructor(id, name, type) {
         // Create member variables and assign values
         // Type your code
+        this.id = id;
+        this.name = name;
+        this.strength = this.getRandomStrength();
+        this.image = "images/super-" + (id + 1) + ".png";
+        this.type = type;
 
     }
 
@@ -38,8 +43,19 @@ class Player {
     view = () => {
         // Accumulate HTML template
         // Type your code here
+        let player = document.createElement('div');
+        player.classList.add('player');
+        player.setAttribute("data-id", this.id);
+        let img = document.createElement('img');
+        img.setAttribute('src', this.image);
+        let name = document.createElement('div');
+        name.textContent = this.name;
+        let strength = document.createElement('div');
+        strength.textContent = this.strength;
+        strength.classList = 'strength';
+        player.append(img, name, strength);
 
-    
+
         return player;
     }
 }
@@ -47,9 +63,13 @@ class Player {
 // Superwar Class
 class Superwar {
     constructor(players) {
-    // Create a field players 
-    // Use Map method to loop through players argument and create new players
-    // Type your code here
+        // Create a field players 
+        // Use Map method to loop through players argument and create new players
+        // Type your code here
+        this.players = players.map((player, n) => {
+            let type = (n % 2 == 0) ? 'hero' : 'villain';
+            return new Player(n, player, type);
+        });
 
     }
 
